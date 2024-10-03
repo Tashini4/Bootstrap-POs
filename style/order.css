@@ -1,0 +1,21 @@
+.container-fluid-3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: gray;
+
+    position: sticky;
+    margin-top: -8px;
+}
+.navbar .nav-link:hover {
+    color: black;
+}
+#Navbar .navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 18px;
+}
