@@ -1,4 +1,4 @@
-import CustomerModels from "../models/customerModels";
+import CustomerModels from "../models/customerModels.js";
 import {customer_array} from "../db/database.js";
 const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -44,9 +44,9 @@ $("#customer_add_btn").on("click", function() {
         alert("invalid customer");
     }else if(last_name.length===0){
         alert("invalid last name");
-    }else if(!validEmail(email)){
+    }else if(!validateEmail(email)){
         alert("invalid email");
-    }else if(!validMobile(mobile)){
+    }else if(!validateMobile(mobile)){
         alert("invalid mobile");
     }else if(address.length===0){
         alert("invalid address");
@@ -99,7 +99,7 @@ $('#customerTableBody').on("click", "tr", function () {
     $('#address').val(address);
 });
 
-$("#customer_delete_button").on("click", function() {
+$("#customer_delete_btn").on("click", function() {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success",
@@ -122,7 +122,7 @@ $("#customer_delete_button").on("click", function() {
             customer_array.splice(selected_customer_index, 1);
 
             // clean customer form
-            cleanCustomerForm();
+            cleanForm();
 
             // reload the table
             loadCustomerTable();
@@ -148,7 +148,7 @@ $("#customer_delete_button").on("click", function() {
 });
 
 
-$("#customer_update_button").on("click", function() {
+$("#customer_update_btn").on("click", function() {
     let index = selected_customer_index;
 
     let first_name = $('#firstName').val();
@@ -166,7 +166,7 @@ $("#customer_update_button").on("click", function() {
     //     address: address
     // };
 
-    let customer = new CustomerModel(
+    let customer = new CustomerModels(
         customer_array[index].id,
         first_name,
         last_name,
@@ -178,7 +178,7 @@ $("#customer_update_button").on("click", function() {
     customer_array[selected_customer_index] = customer;
 
     // clean customer form
-    cleanCustomerForm();
+    cleanForm();
 
     // reload the table
     loadCustomerTable();
