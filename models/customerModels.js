@@ -3,7 +3,7 @@
 * export default
 * */
 
-export default class CustomerModel {
+export default class CustomerModels {
     constructor(id, first_name, last_name, mobile, email, address) {
         this._id=id;
         this._first_name=first_name;

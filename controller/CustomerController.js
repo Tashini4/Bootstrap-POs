@@ -1,4 +1,4 @@
-import CustomerModel from "../models/customerModels.js";
+import CustomerModels from "../models/customerModels";
 import {customer_array} from "../db/database.js";
 const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -9,24 +9,28 @@ const validateMobile = (mobile) => {
     const sriLankanMobileRegex = /^(?:\+94|0)?7[0-9]{8}$/;
     return sriLankanMobileRegex.test(mobile);
 }
-const loadCustomerTable = () => {
-    $("#customerTableBody").empty();
-    customer_array.map((item, index) => {
-        console.log(item);
-        let data = `<tr><td>${item.first_name}</td><td>${item.last_name}</td><td>${item.mobile}</td><td>${item.email}</td><td>${item.address}</td></tr>`
-        $("#customerTableBody").append(data);
-    })
-}
 
-const cleanCustomerForm  = () => {
+const cleanForm  = () => {
     $('#firstName').val("");
     $('#lastName').val("")
     $('#email').val("");
     $('#mobile').val("");
     $('#address').val("");
 }
-// selected customer for update or delete
-let selected_customer_index = null;
+
+const loadCustomerTable = () => {
+    $("#customerTableBody").empty();
+    customer_array.map((item, index) => {
+        console.log(item);
+        let data = `<tr>
+                    <td>${item.first_name}</td>
+                    <td>${item.last_name}</td>
+                    <td>${item.mobile}</td>
+                    <td>${item.email}</td>
+                    <td>${item.address}</td></tr>`
+        $("#customerTableBody").append(data);
+    })
+}
 
 //Add Customer
 $("#customer_add_btn").on("click", function() {
@@ -66,29 +70,26 @@ $("#customer_add_btn").on("click", function() {
 
         customer_array.push(customer);
         loadCustomerTable();
-        clearForm();
+        cleanForm();
     }
-
-
-
 });
-//------------
 
+
+let selected_customer_index = null;
 $('#customerTableBody').on("click", "tr", function () {
-    // get tr index
     let index = $(this).index();
 
     selected_customer_index = $(this).index();
 
     // get customer object by index
-    let customer_obj = customer_array[index];
+    let customer = customer_array[index];
 
     // get customer's data
-    let first_name = customer_obj.first_name;
-    let last_name = customer_obj.last_name;
-    let email = customer_obj.email;
-    let mobile = customer_obj.mobile;
-    let address = customer_obj.address;
+    let first_name = customer.first_name;
+    let last_name = customer.last_name;
+    let email = customer.email;
+    let mobile = customer.mobile;
+    let address = customer.address;
 
     // fill data into the form
     $('#firstName').val(first_name);
@@ -98,45 +99,7 @@ $('#customerTableBody').on("click", "tr", function () {
     $('#address').val(address);
 });
 
-$('#customer_update_btn').on('click', function () {
-
-    let index = selected_customer_index;
-
-    let first_name = $('#firstName').val();
-    let last_name = $('#lastName').val();
-    let mobile = $('#mobile').val();
-    let email = $('#email').val();
-    let address = $('#address').val();
-
-    // let customer = {
-    //     id: customer_array[index].id,
-    //     first_name: first_name,
-    //     last_name: last_name,
-    //     mobile: mobile,
-    //     email: email,
-    //     address: address
-    // };
-
-    let customer = new CustomerModel(
-        customer_array[index].id,
-        first_name,
-        last_name,
-        mobile,
-        email,
-        address
-    );
-    // update item
-    customer_array[selected_customer_index] = customer;
-
-    // clean customer form
-    cleanCustomerForm();
-
-    // reload the table
-    loadCustomerTable();
-});
-
-$("#customer_delete_btn").on('click', function () {
-
+$("#customer_delete_button").on("click", function() {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success",
@@ -182,4 +145,41 @@ $("#customer_delete_btn").on('click', function () {
         }
     });
 
+});
+
+
+$("#customer_update_button").on("click", function() {
+    let index = selected_customer_index;
+
+    let first_name = $('#firstName').val();
+    let last_name = $('#lastName').val();
+    let mobile = $('#mobile').val();
+    let email = $('#email').val();
+    let address = $('#address').val();
+
+    // let customer = {
+    //     id: customer_array[index].id,
+    //     first_name: first_name,
+    //     last_name: last_name,
+    //     mobile: mobile,
+    //     email: email,
+    //     address: address
+    // };
+
+    let customer = new CustomerModel(
+        customer_array[index].id,
+        first_name,
+        last_name,
+        mobile,
+        email,
+        address
+    );
+    // update item
+    customer_array[selected_customer_index] = customer;
+
+    // clean customer form
+    cleanCustomerForm();
+
+    // reload the table
+    loadCustomerTable();
 });

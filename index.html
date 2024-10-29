@@ -79,9 +79,10 @@
     </div>
 </div>
 <!-- Customer -->
-<div id="customer-section" class="container mt-5">
+<div id="customer-section" class="container ">
+    <!-- Customer Form -->
     <div class="card my-4">
-        <div class="card-header">Customer</div>
+        <div class="card-header">Customer Details</div>
         <div class="card-body">
             <form id="customerForm">
                 <div class="row mb-3">
@@ -106,31 +107,32 @@
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address</label>
-                    <textarea class="form-control" id="address" rows="3" placeholder="Address" required></textarea>
+                    <textarea class="form-control" id="address" rows="3" placeholder="Enter Address" required></textarea>
                 </div>
-                <button type="button" class="btn btn-primary w-30" id="customer_add_button">Save</button>
-                <button type="button" class="btn btn-info w-30" id="customer_delete_button">Delete</button>
-                <button type="button" class="btn btn-danger w-30" id="customer_update_button">Update</button>
+                <button type="button" class="btn btn-success" id="customer_add_button">Save</button>
+                <button type="button" class="btn btn-danger" id="customer_delete_button">Delete</button>
+                <button type="button" class="btn btn-warning" id="customer_update_button">Update</button>
             </form>
         </div>
     </div>
 
-    <!-- Customer Table -->
-    <h3 class="mt-5">Customer</h3>
-    <table class="table table-bordered table-striped mt-3">
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Mobile Number</th>
-            <th>Email</th>
-            <th>Address</th>
-        </tr>
-        </thead>
-        <tbody id="customerTableBody">
-        <!-- Customer rows will be added here -->
-        </tbody>
-    </table>
+    <h3 >Customer</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile Number</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody id="customerTableBody">
+            <!-- Customer rows will be added here -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Item -->
