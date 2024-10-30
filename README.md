@@ -1,10 +1,11 @@
 # Sitemap
 ![image](https://github.com/user-attachments/assets/c0ef6f62-86f7-46c2-8e46-3ed344fb53f0)
 # Wireframe
-![image](https://github.com/user-attachments/assets/99c705a2-c6db-40a4-9bbf-0eed128a6135)
-![image](https://github.com/user-attachments/assets/e68787a4-191b-4e36-88ae-50a70f6b5af6)
-![image](https://github.com/user-attachments/assets/90f55680-6881-4c94-a30e-73add6042adb)
-![image](https://github.com/user-attachments/assets/caa77257-3720-40cd-a41c-a6568e7b5a4e)
+![image](https://github.com/user-attachments/assets/ffc33308-184a-427b-ada8-a5d80693eaed)
+![image](https://github.com/user-attachments/assets/f49c0f07-2056-4334-85ab-3d1dc2b4d61c)
+![image](https://github.com/user-attachments/assets/6d8994f9-14ee-4ef2-88b5-e80449618b5d)
+![image](https://github.com/user-attachments/assets/8a5ffecc-b85d-4f05-a859-e12742b3badf)
+
 # Mockup
 https://www.figma.com/design/HS7mtPPoFOBNOduy2AKd0b/POS-System?node-id=0-1&node-type=canvas&t=J5fzpbyJDu3r9BOa-0
 
