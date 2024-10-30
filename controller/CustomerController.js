@@ -12,7 +12,7 @@ const validateMobile = (mobile) => {
 
 const cleanForm  = () => {
     $('#firstName').val("");
-    $('#lastName').val("")
+    $('#lastName').val("");
     $('#email').val("");
     $('#mobile').val("");
     $('#address').val("");
