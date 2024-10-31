@@ -1,5 +1,7 @@
 import CustomerModels from "../models/customerModels.js";
 import {customer_array} from "../db/database.js";
+
+let selected_customer_Index = null;
 const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
@@ -10,96 +12,159 @@ const validateMobile = (mobile) => {
     return sriLankanMobileRegex.test(mobile);
 }
 
-const cleanForm  = () => {
-    $('#firstName').val("");
-    $('#lastName').val("");
-    $('#email').val("");
-    $('#mobile').val("");
-    $('#address').val("");
-}
+$("#SaveCustomer").on("click", function() {
+    let First_Name = $("#firstName").val();
+    let Last_Name = $("#lastName").val();
+    let Email = $("#email").val();
+    let Phone_Number = $("#mobile").val();
+    let Cus_Address = $("#address").val();
 
-const loadCustomerTable = () => {
-    $("#customerTableBody").empty();
-    customer_array.map((item, index) => {
-        console.log(item);
-        let data = `<tr>
-                    <td>${item.first_name}</td>
-                    <td>${item.last_name}</td>
-                    <td>${item.mobile}</td>
-                    <td>${item.email}</td>
-                    <td>${item.address}</td></tr>`
-        $("#customerTableBody").append(data);
-    })
-}
-
-//Add Customer
-$("#customer_add_btn").on("click", function() {
-    let first_name = $('#firstName').val();
-    let last_name = $('#lastName').val();
-    let mobile = $('#mobile').val();
-    let email = $('#email').val();
-    let address = $('#address').val();
-
-    if(first_name.length===0){
-        alert("invalid customer");
-    }else if(last_name.length===0){
-        alert("invalid last name");
-    }else if(!validateEmail(email)){
-        alert("invalid email");
-    }else if(!validateMobile(mobile)){
-        alert("invalid mobile");
-    }else if(address.length===0){
-        alert("invalid address");
-    }else{
-        let customer = new CustomerModels(
-            customer_array.length + 1,
-            first_name,
-            last_name,
-            mobile,
-            email,
-            address
-        );
-        new CustomerModels();
+    if (First_Name.length===0){
         Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "customer has been saved",
-            showConfirmButton: false,
-            timer: 1500
+            icon: "error",
+            title: "Oops...",
+            text: "First Name",
+            footer: '<a href="#">Fill the First Name</a>'
         });
-
-        customer_array.push(customer);
-        loadCustomerTable();
-        cleanForm();
+    }else if (Last_Name.length===0){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Last Name",
+            footer: '<a href="#">Fill the Last Name</a>'
+        });
+    }else if (!validateEmail(Email)){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Email",
+            footer: '<a href="#">Fill the Email</a>'
+        });
+    }else if (Phone_Number.length===0){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Phone Number",
+            footer: '<a href="#">Fill the Phone Number</a>'
+        });
+    }else if (Cus_Address.length===0){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Address",
+            footer: '<a href="#">Fill the Address</a>'
+        });
+    } else {
+        let customerData = new CustomerModels(
+            customer_array.length + 1,
+            First_Name,
+            Last_Name,
+            Email,
+            Phone_Number,
+            Cus_Address
+        );
+        customer_array.push(customerData);
+        Swal.fire({
+            title: "Customer is Saved!",
+            text: "You clicked the button!",
+            icon: "success"
+        });
+        customerTable();
     }
 });
 
+const customerTable = () => {
+    $("#CustomerTable").empty();
+    customer_array.map((item,index) => {
+        let Data = `<tr>
+            <td>${item.id}</td>
+            <td>${item.firstName}</td>
+            <td>${item.lastName}</td>
+            <td>${item.email}</td>
+            <td>${item.address}</td>
+            <td>${item.mobile}</td>
+            </tr>`
+        $("#CustomerTable").append(Data);
+        clearForm();
+    });
+}
 
-let selected_customer_index = null;
-$('#customerTableBody').on("click", "tr", function () {
-    let index = $(this).index();
+const clearForm = ()=>{
+    $("#firstName").val('');
+    $("#lastName").val('');
+    $("#email").val('');
+    $("#mobile").val('');
+    $("#address").val('');
+}
 
-    selected_customer_index = $(this).index();
+/////////////////////////////////////////////////////////////////////////////////
+/* Update customer */
+/////////////////////////////////////////////////////////////////////////////////
 
-    // get customer object by index
-    let customer = customer_array[index];
+$("#customer_update_button").on("click", function() {
+    // Get values from form inputs
+    let first_Name = $("#firstName").val();
+    let last_Name = $("#lastName").val();
+    let cus_Email = $("#email").val();
+    let phone_Number = $("#mobile").val();
+    let customer_Address = $("#address").val();
 
-    // get customer's data
-    let first_name = customer.first_name;
-    let last_name = customer.last_name;
-    let email = customer.email;
-    let mobile = customer.mobile;
-    let address = customer.address;
+    if (selected_customer_Index !== undefined && selected_customer_Index < customer_array.length) {
 
-    // fill data into the form
-    $('#firstName').val(first_name);
-    $('#lastName').val(last_name);
-    $('#email').val(email);
-    $('#mobile').val(mobile);
-    $('#address').val(address);
+        /*let updatedCustomer = {
+            id: CustomerDB[selected_customer_Index].id, // Preserve existing ID
+            first_Name: first_Name,
+            lastName: last_Name,
+            email: cus_Email,
+            mobile: phone_Number,
+            address: customer_Address
+        };*/
+
+        let customerUpdate = new CustomerModels(
+            customer_array[selected_customer_Index].id,
+            first_Name,
+            last_Name,
+            cus_Email,
+            phone_Number,
+            customer_Address
+        );
+
+        customer_array[selected_customer_Index] = customerUpdate;
+
+        customerTable();
+
+        clearForm();
+
+    } else {
+        alert("No customer selected for update.");
+    }
 });
 
-$("#customer_delete_btn").on("click", function() {
+$("#CustomerTable").on("click",'tr', function (){
+    let value = $(this).index();
+
+    selected_customer_Index = $(this).index();
+
+    let customer_obj = customer_array[value];
+
+    let first_name = customer_obj.firstName;
+    let last_name = customer_obj.lastName;
+    let phone_number = customer_obj.mobile;
+    let email = customer_obj.email;
+    let addressCus = customer_obj.address;
+
+    $("#firstName").val(first_name);
+    $("#lastName").val(last_name);
+    $("#mobile").val(phone_number);
+    $("#email").val(email);
+    $("#address").val(addressCus);
+});
+
+////////////////////////////////////////////////////////////////////////
+/*Delete Customer*/
+///////////////////////////////////////////////////////////////////////
+
+$("#Customer_delete_button").on("click", function (){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success",
@@ -117,24 +182,15 @@ $("#customer_delete_btn").on("click", function() {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-
-            // ==========================================================
-            customer_array.splice(selected_customer_index, 1);
-
-            // clean customer form
-            cleanForm();
-
-            // reload the table
-            loadCustomerTable();
-            // ==========================================================
-
+            customer_array.splice(selected_customer_Index, 1);
+            clearForm();
+            customerTable();
             swalWithBootstrapButtons.fire({
                 title: "Deleted!",
-                text: "Your customer has been deleted.",
+                text: "Your file has been deleted.",
                 icon: "success"
             });
         } else if (
-            /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
             swalWithBootstrapButtons.fire({
@@ -145,41 +201,6 @@ $("#customer_delete_btn").on("click", function() {
         }
     });
 
-});
 
 
-$("#customer_update_btn").on("click", function() {
-    let index = selected_customer_index;
-
-    let first_name = $('#firstName').val();
-    let last_name = $('#lastName').val();
-    let mobile = $('#mobile').val();
-    let email = $('#email').val();
-    let address = $('#address').val();
-
-    // let customer = {
-    //     id: customer_array[index].id,
-    //     first_name: first_name,
-    //     last_name: last_name,
-    //     mobile: mobile,
-    //     email: email,
-    //     address: address
-    // };
-
-    let customer = new CustomerModels(
-        customer_array[index].id,
-        first_name,
-        last_name,
-        mobile,
-        email,
-        address
-    );
-    // update item
-    customer_array[selected_customer_index] = customer;
-
-    // clean customer form
-    cleanForm();
-
-    // reload the table
-    loadCustomerTable();
 });

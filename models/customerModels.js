@@ -3,47 +3,38 @@
 * export default
 * */
 
-export default class CustomerModels {
-    constructor(id, first_name, last_name, mobile, email, address) {
-        this._id=id;
-        this._first_name=first_name;
-        this._last_name=last_name;
-        this._mobile=mobile;
-        this._email=email;
-        this._address=address;
-    }
+export default class CustomerModels{
+    constructor(id,firstName,lastName,email,mobile,address) {
 
+        this._id = id;
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._email = email;
+        this._mobile = mobile;
+        this._address = address;
+    }
     get id() {
         return this._id;
     }
 
-    set id(id) {
-        this._id=id;
+    set id(value) {
+        this._id = value;
     }
 
-
-    get first_name() {
-        return this._first_name;
+    get firstName() {
+        return this._firstName;
     }
 
-    set first_name(value) {
-        this._first_name = value;
+    set firstName(value) {
+        this._firstName = value;
     }
 
-    get last_name() {
-        return this._last_name;
+    get lastName() {
+        return this._lastName;
     }
 
-    set last_name(value) {
-        this._last_name = value;
-    }
-
-    get mobile() {
-        return this._mobile;
-    }
-
-    set mobile(value) {
-        this._mobile = value;
+    set lastName(value) {
+        this._lastName = value;
     }
 
     get email() {
@@ -54,6 +45,14 @@ export default class CustomerModels {
         this._email = value;
     }
 
+    get mobile() {
+        return this._mobile;
+    }
+
+    set mobile(value) {
+        this._mobile = value;
+    }
+
     get address() {
         return this._address;
     }
@@ -61,4 +60,5 @@ export default class CustomerModels {
     set address(value) {
         this._address = value;
     }
+
 }
