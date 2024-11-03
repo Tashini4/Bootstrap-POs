@@ -189,3 +189,73 @@ $("#AddItem").on('click', function() {
 /* Set total */
 /////////////////////////////////////////////////////////////////
 
+function calculateTotal() {
+    let total = 0;
+    const table = document.getElementById("OrderTable");
+
+    // Loop through each row except the header row
+    for (let i = 0; i < table.rows.length; i++) {
+        const totalCell = table.rows[i].cells[4]; // Assuming "Total" is in the 5th column (index 4)
+        const cellValue = parseFloat(totalCell.innerText || totalCell.textContent); // Parse as float for decimal values
+
+        if (!isNaN(cellValue)) {
+            total += cellValue; // Add to total if it's a valid number
+        }
+    }
+    document.getElementById("subtotal").textContent = total.toFixed(2);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*/Calculate Total/*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*function calculateTotal() {
+    let total = 0;
+    const table = document.getElementById("orderTable");
+
+    // Loop through each row except the header row
+    for (let i = 0; i < table.rows.length; i++) {
+        const totalCell = table.rows[i].cells[4]; // Assuming "Total" is in the 5th column (index 4)
+        const cellValue = parseFloat(totalCell.innerText || totalCell.textContent); // Parse as float for decimal values
+
+        if (!isNaN(cellValue)) {
+            total += cellValue; // Add to total if it's a valid number
+        }
+    }
+
+
+   /!* /document.querySelector("h4 > strong").textContent = total.toFixed(2);/!*!/
+}*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*/Cash And Discount/*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function getSubTotalValue() {
+    // Extract the number from the text "SubTotal: 123.45"
+    let subtotal_Value = parseFloat(document.getElementById("subtotal").textContent) || 0;
+    return subtotal_Value;
+}
+
+// Example usage
+
+function calculateCashBalance(){
+    const currentSubTotal = getSubTotalValue();
+    let cash = document.getElementById("cash").value;
+    let discount = document.getElementById("discount").value;
+
+    if (isNaN(cash) || isNaN(discount) || isNaN(currentSubTotal)) {
+        alert("Please enter valid numbers");
+    }else {
+        let totalAmount = (currentSubTotal - discount);
+        let cashBalance = (cash - totalAmount);
+
+        console.log(cashBalance);
+        /*/document.getElementById("balance").value = cashBalance.toFixed(2);/*/
+        document.querySelector("h4 > strong").textContent = totalAmount.toFixed(2);
+        document.querySelector("h5 > strong").textContent = cashBalance.toFixed(2);
+    }
+}
+
+$("#PurchaseItem").on("click", function (){
+    calculateCashBalance();
+});
