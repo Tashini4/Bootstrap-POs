@@ -97,7 +97,7 @@ $("#item").on("click", function (){
 });
 
 /////////////////////////////////////////////////////////////////
-/*Genarate Order Id */
+/*Generate Order Id */
 /////////////////////////////////////////////////////////////////
 
 function generateOrderId () {
@@ -202,26 +202,6 @@ function calculateTotal() {
     document.getElementById("subtotal").textContent = total.toFixed(2);
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*/Calculate Total/*/
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*function calculateTotal() {
-    let total = 0;
-    const table = document.getElementById("orderTable");
-
-    // Loop through each row except the header row
-    for (let i = 0; i < table.rows.length; i++) {
-        const totalCell = table.rows[i].cells[4]; // Assuming "Total" is in the 5th column (index 4)
-        const cellValue = parseFloat(totalCell.innerText || totalCell.textContent); // Parse as float for decimal values
-
-        if (!isNaN(cellValue)) {
-            total += cellValue; // Add to total if it's a valid number
-        }
-    }
-
-
-   /!* /document.querySelector("h4 > strong").textContent = total.toFixed(2);/!*!/
-}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*/Cash And Discount/*/
