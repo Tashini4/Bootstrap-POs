@@ -1,9 +1,4 @@
-/*
-* export
-* export default
-* */
-
-export default class CustomerModels{
+export default class CustomerModel{
     constructor(id,firstName,lastName,email,mobile,address) {
 
         this._id = id;

@@ -1,5 +1,8 @@
-import {item_array} from "../db/database.js";
-import ItemModels from "../models/itemModels.js";
+///////////////////////////////////////////////////////
+/*Item Save & Table update*/
+//////////////////////////////////////////////////////
+import {ItemDB} from "../db/database.js";
+import ItemModel from "../models/itemModel.js";
 
 let selected_item_Index = null;
 
@@ -18,15 +21,15 @@ $("#SaveItem").on("click", function() {
         ItemPrice : Item_Price,
         ItemQuantity : Item_Quantity
     }*/
-    let item = new ItemModels(
-        item_array.length + 1,
+    let item = new ItemModel(
+        ItemDB.length + 1,
         Item_Name,
         Item_Description,
         Item_Quantity,
         Item_Price
     );
 
-    item_array.push(item);
+    ItemDB.push(item);
     itemTable();
     clearForm();
 });
@@ -37,7 +40,7 @@ $("#SaveItem").on("click", function() {
 
 const itemTable = () => {
     $("#ItemTable").empty();
-    item_array.map((item,index) => {
+    ItemDB.map((item,index) => {
         let Data = `<tr>
             <td>${item.Itemid}</td>
             <td>${item.itemName}</td>
@@ -69,17 +72,17 @@ $('#item_update_button').on('click', function() {
     let Item_quantity = $('#qty').val();
     let Item_price = $('#price').val();
 
-    if (selected_item_Index !== undefined && selected_item_Index < item_array.length){
+    if (selected_item_Index !== undefined && selected_item_Index < ItemDB.length){
 
-        let itemData = new ItemModels(
-            item_array[selected_item_Index].Itemid,
+        let itemData = new ItemModel(
+            ItemDB[selected_item_Index].Itemid,
             Item_name,
             Item_description,
             Item_quantity,
             Item_price
         );
 
-        item_array[selected_item_Index] = itemData;
+        ItemDB[selected_item_Index] = itemData;
 
         itemTable();
         clearForm();
@@ -97,7 +100,7 @@ $('#ItemTable').on('click','tr', function () {
 
     selected_item_Index = $(this).index();
 
-    let item_obj = item_array[value];
+    let item_obj = ItemDB[value];
 
     let item_name = item_obj.itemName;
     let item_description = item_obj.itemDescription;
@@ -132,7 +135,7 @@ $('#item_delete_button').on('click', function() {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            item_array.splice(selected_item_Index, 1);
+            ItemDB.splice(selected_item_Index, 1);
             itemTable();
             clearForm();
             swalWithBootstrapButtons.fire({
@@ -152,4 +155,3 @@ $('#item_delete_button').on('click', function() {
         }
     });
 });
-

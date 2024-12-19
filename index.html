@@ -2,133 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Boostrap_POS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="imge/x-icon" href="Image/Hot%20Chili%20logo%20design%20template.jpg">
+</head>
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg text-bg-primary p-3">
+<nav class="navbar navbar-expand-lg bg-secondary-subtle text-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">POS System</a>
+        <!--<a class="navbar-brand"><img src="Image/Hot%20Chili%20logo%20design%20template.jpg" width="60"></a>-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <span id="dashboard-nav" class="nav-link">Dashboard</span>
+                    <span id="Home" class="nav-link" aria-current="page" href="#">Home</span>
                 </li>
                 <li class="nav-item">
-                    <span id="customer-nav" class="nav-link">Customer</span>
+                    <span id="Customer" class="nav-link" href="#">Customer</span>
                 </li>
                 <li class="nav-item">
-                    <span  id="item-nav" class="nav-link">Item</span>
+                    <span id="Store" class="nav-link" href="#">Item</span>
                 </li>
                 <li class="nav-item">
-                    <span  id="order-nav" class="nav-link">Place Order</span>
+                    <span id="Order" class="nav-link" href="">Order</span>
                 </li>
                 <li class="nav-item">
-                    <span id="order-history-nav" class="nav-link">Order History</span>
+                    <span id="Order_history" class="nav-link" href="">Order History</span>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<div  id="Dashboard">
+    <div class="card-body">
+        <h1 class="text-start position-absolute top-10 start-50 translate-middle-x">Dashboard Overview</h1>
+        <div class="d-flex p-2 position-absolute top-50 start-50 translate-middle grid gap-3">
 
-<!-- Dashboard Cards -->
-<div id="dashboard-section" class="container mt-3">
-    <h1 class="text-center mb-4 fs-1">Dashboard</h1>
-    <div class="row">
-        <!-- Customer Count Card -->
-        <div class="col-md-3">
-            <div class="card text-white text-bg-danger p-3 shadow-lg p-3 mb-5 rounded">
+            <div class="card p-3 mb-2 bg-primary text-white p-2 g-col-6" style="width: 18rem;">
                 <div class="card-body">
-                    <img src="assests/image/Customer.png" height="90" width="90"/><h5 class="card-title">Customers</h5>
+                    <h5 class="card-title">Customers</h5>
                     <p class="card-text fs-2" id="customerCount">100</p>
                 </div>
             </div>
-        </div>
-        <!-- Item Count Card -->
-        <div class="col-md-3">
-            <div class="card text-white bg-success mb-3 shadow-lg p-3 mb-5 rounded">
+            <div class="card p-3 mb-2 bg-success text-white p-2 g-col-6" style="width: 18rem;">
                 <div class="card-body">
-                    <img src="assests/image/item.png" height="90" width="90"/>
                     <h5 class="card-title">Items</h5>
                     <p class="card-text fs-2" id="itemCount">50</p>
                 </div>
             </div>
-        </div>
-        <!-- Order Count Card -->
-        <div class="col-md-3">
-            <div class="card text-white bg-warning mb-3 shadow-lg p-3 mb-5 rounded">
+            <div class="card p-3 mb-2 bg-warning text-dark p-2 g-col-6" style="width: 18rem;">
                 <div class="card-body">
-                    <img src="assests/image/order.png" height="90" width="90"/><h5 class="card-title">Orders</h5>
+                    <h5 class="card-title">Orders</h5>
                     <p class="card-text fs-2" id="orderCount">150</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Customer -->
-<div id="customer-section" class="container ">
-    <!-- Customer Form -->
-    <div class="card my-4">
-        <div class="card-header">Fill The Customer Details</div>
-        <div class="card-body">
-            <form id="customerForm">
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
-                    </div>
-                    <div class="col">
-                        <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
-                    </div>
+
+<!--Create Customer-->
+<div class="card" id="Customer_Sec">
+    <div class="card-body">
+        <div id="customer-section" class="container mt-5">
+
+            <!-- Customer Form -->
+            <div class="card my-4">
+                <div class="card-header">Fill The Customer Details</div>
+                <div class="card-body">
+                    <form id="customerForm">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                            </div>
+                            <div class="col">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="mobile" class="form-label">Mobile Number</label>
+                                <input type="text" class="form-control" id="mobile" placeholder="Mobile Number" required>
+                            </div>
+                            <div class="col">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="Enter Address" required></textarea>
+                        </div>
+                        <button type="button" class="btn btn-success" id="SaveCustomer">Save</button>
+                        <button type="button" class="btn btn-warning" id="customer_update_button">Update</button>
+                        <button type="button" class="btn btn-danger" id="Customer_delete_button">Delete</button>
+                    </form>
                 </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="mobile" class="form-label">Mobile Number</label>
-                        <input type="text" class="form-control" id="mobile" placeholder="Mobile Number" required>
-                    </div>
-                    <div class="col">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email" required>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Address</label>
-                    <textarea class="form-control" id="address" rows="3" placeholder="Enter Address" required></textarea>
-                </div>
-                <button type="button" class="btn btn-success" id="SaveCustomer">Save</button>
-                <button type="button" class="btn btn-warning" id="customer_update_button">Update</button>
-                <button type="button" class="btn btn-danger" id="Customer_delete_button">Delete</button>
-            </form>
+            </div>
+            <!--Customer Table-->
+            <div class="card p-3">
+                <h4 class="card-title">Customers</h4>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                    </tr>
+                    </thead>
+                    <tbody id="CustomerTable">
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <!--Customer Table-->
-    <div class="card p-3">
-        <h4 class="card-title">Customers</h4>
-        <table class="table table-bordered table-striped">
-            <thead class="table-info">
-            <tr>
-                <th>Customer ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-            </tr>
-            </thead>
-            <tbody id="CustomerTable">
-
-            </tbody>
-        </table>
-    </div>
 </div>
+<div id="Item_Sec" class="container mt-5">
 
-<!-- Item -->
-<div id="item-section" class="container mt-5">
     <!-- Item Form -->
     <div class="card my-4">
         <div class="card-header">Enter Item Details</div>
@@ -164,7 +160,7 @@
     <div class="card p-3">
         <h4 class="card-title">Item</h4>
         <table class="table table-bordered table-striped">
-            <thead class="table-info">
+            <thead class="table-dark">
             <tr>
                 <th>Item ID</th>
                 <th>Item Name</th>
@@ -179,8 +175,7 @@
         </table>
     </div>
 </div>
-<!-- Order -->
-<div id="order-section" class="container mt-5"><!-- Order Form -->
+<main id="Order_Sec">
     <div class="container mt-5">
         <div class="row">
             <!-- Invoice Details -->
@@ -197,7 +192,7 @@
                             <input type="date" class="form-control" id="date">
                         </div>
                         <div class="mb-3">
-                            <label for="customer1" class="form-label">Customer ID:</label>
+                            <label for="customer" class="form-label">Customer ID:</label>
                             <select class="form-select" id="customer1">
                                 <!-- <option value="1" selected></option>-->
                             </select>
@@ -241,7 +236,7 @@
                             <label for="orderQty" class="form-label">Order Quantity:</label>
                             <input type="text" class="form-control" id="orderQty" >
                         </div>
-                        <button class="btn btn btn-info" id="AddItem">Add Item</button>
+                        <button class="btn btn-success" id="AddItem">Add Item</button>
                     </div>
                 </div>
             </div>
@@ -249,7 +244,8 @@
             <!-- Total & Payment -->
             <div class="col-md-4">
                 <div class="total-box border rounded p-3">
-                    <h5 id="Total">Total: <strong></strong></h5>
+                    <p class="text-danger">SubTotal: <span id="subtotal"></span></p>
+                    <!--<h4>Total: <strong></strong></h4>-->
 
                     <div class="mb-3">
                         <label for="cash" class="form-label">Cash:</label>
@@ -262,11 +258,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="balance" class="form-label">Balance:</label>
-                        <input type="text" class="form-control" id="balance" >
+                        <h4 id="total">Total: <strong></strong></h4>
+                        <h5 id="balance">Balance: <strong></strong></h5>
+                        <!--<label for="balance" class="form-label">Balance:</label>
+                        <input type="text" class="form-control" id="balance" >-->
                     </div>
 
-                    <button class="btn btn btn-info w-50" id="PurchaseItem">Purchase</button>
+                    <button class="btn btn-primary w-100" id="ToatalCal">Calculate Total</button>
+                    <label class="form-label"></label>
+                    <button class="btn btn-success w-100" id="PurchaseItem">Purchase</button>
                 </div>
             </div>
         </div>
@@ -274,12 +274,12 @@
         <!-- Table -->
         <div class="mt-5">
             <table class="table table-striped">
-                <thead class="table-info">
+                <thead class="table-success">
                 <tr>
-                    <th>Item ID</th>
-                    <th>Item Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Quantity on Hand</th>
+                    <th>Order Qty</th>
                     <th>Total</th>
                 </tr>
                 </thead>
@@ -289,99 +289,95 @@
             </table>
         </div>
     </div>
-</div>
+</main>
+<div class="card" id="HistoryOfOrder">
+    <div class="card-body">
+        <h1 class="text-start position-absolute top-10 start-50 translate-middle-x">Order History</h1>
+        <div class="mt-5" >
+            <table class="table table-striped">
+                <thead class="table-success">
+                <tr>
+                    <th>Item ID</th>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="OrderTableBody">
 
-<!--Order History-->
-<div id="order-history-section" class="container mt-5">
-
-    <!-- Order History Table -->
-    <div class="card" id="HistoryOfOrder">
-        <div class="card-body">
-            <h1 class="text-start position-absolute top-10 start-50 translate-middle-x">Order History</h1>
-            <div class="mt-5" >
-                <table class="table table-striped">
-                    <thead class="table-info">
-                    <tr>
-                        <th>Item ID</th>
-                        <th>Item Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr id="OrderTableBody">
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
-
-    <script src="assests/lib/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="assests/lib/jquery-3.7.1.min.js"></script>
 <script>
+    let Dashboard = document.getElementById("Home");
+    let Customer = document.getElementById("Customer");
+    let Store = document.getElementById("Store");
+    let Order = document.getElementById("Order");
+    let Order_History = document.getElementById("Order_history");
 
-    let dashboard_nav = document.getElementById("dashboard-nav");
-    let customer_nav = document.getElementById("customer-nav");
-    let item_nav = document.getElementById("item-nav");
-    let order_nav = document.getElementById("order-nav");
-    let order_history_nav = document.getElementById("order-history-nav");
+    let Dashboard_sec = document.getElementById("Dashboard");
+    let Customer_sec = document.getElementById("Customer_Sec");
+    let Store_sec = document.getElementById("Item_Sec");
+    let Order_sec = document.getElementById("Order_Sec");
+    let OrderHistory = document.getElementById("HistoryOfOrder");
 
-    let dashboard_section = document.getElementById("dashboard-section");
-    let customer_section = document.getElementById("customer-section");
-    let item_section = document.getElementById("item-section");
-    let order_section = document.getElementById("order-section");
-    let order_history_section = document.getElementById("order-history-section");
+    Dashboard_sec.style.display = "block";
+    Customer_sec.style.display = "none";
+    Store_sec.style.display = "none";
+    Order_sec.style.display = "none";
+    OrderHistory.style.display = "none";
 
-    customer_section.style.display="none";
-    item_section.style.display="none";
-    order_section.style.display="none";
-    order_history_section.style.display="none";
-
-    dashboard_nav.addEventListener('click', function () {
-        dashboard_section.style.display="block"
-        customer_section.style.display="none";
-        item_section.style.display="none";
-        order_section.style.display="none";
-        order_history_section.style.display="none";
+    Dashboard.addEventListener("click", function (){
+        Dashboard_sec.style.display = "block";
+        Customer_sec.style.display = "none";
+        Store_sec.style.display = "none";
+        Order_sec.style.display = "none";
+        OrderHistory.style.display = "none";
     });
 
-    customer_nav.addEventListener('click', function () {
-        dashboard_section.style.display="none"
-        customer_section.style.display="block";
-        item_section.style.display="none";
-        order_section.style.display="none";
-        order_history_section.style.display="none";
-    });
-    item_nav.addEventListener('click', function () {
-        dashboard_section.style.display="none"
-        customer_section.style.display="none";
-        item_section.style.display="block";
-        order_section.style.display="none";
-        order_history_section.style.display="none";
-    });
-   order_nav.addEventListener('click', function () {
-        dashboard_section.style.display="none"
-        customer_section.style.display="none";
-        item_section.style.display="none";
-        order_section.style.display="block";
-        order_history_section.style.display="none";
-    });
-    order_history_nav.addEventListener('click', function () {
-        dashboard_section.style.display="none"
-        customer_section.style.display="none";
-        item_section.style.display="none";
-        order_section.style.display="none";
-        order_history_section.style.display="block";
+    Customer.addEventListener("click", function (){
+        Dashboard_sec.style.display = "none";
+        Customer_sec.style.display = "block";
+        Store_sec.style.display = "none";
+        Order_sec.style.display = "none";
+        OrderHistory.style.display = "none";
     });
 
+    Store.addEventListener("click", function (){
+        Dashboard_sec.style.display = "none";
+        Customer_sec.style.display = "none";
+        Store_sec.style.display = "block";
+        Order_sec.style.display = "none";
+        OrderHistory.style.display = "none";
+    });
+
+    Order.addEventListener("click", function (){
+        Dashboard_sec.style.display = "none";
+        Customer_sec.style.display = "none";
+        Store_sec.style.display = "none";
+        Order_sec.style.display = "block";
+        OrderHistory.style.display = "none";
+    });
+
+    Order_History.addEventListener("click", function (){
+        Dashboard_sec.style.display = "none";
+        Customer_sec.style.display = "none";
+        Store_sec.style.display = "none";
+        Order_sec.style.display = "none";
+        OrderHistory.style.display = "block";
+    });
 </script>
 <script type="module" src="controller/CustomerController.js"></script>
 <script type="module" src="controller/ItemController.js"></script>
 <script type="module" src="controller/OrderController.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

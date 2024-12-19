@@ -1,8 +1,7 @@
-import {customer_array,item_array, order_array} from "../db/database.js";
-import CustomerModel from "../models/customerModels.js";
-import ItemModel from "../models/itemModels.js";
-import OrderModel from "../models/orderModels.js";
-
+import {CustomerDB,ItemDB, OrderDB} from "../db/database.js";
+import ItemModel from "../models/itemModel.js";
+import OrderModel from "../models/orderModel.js";
+import CustomerModel from "../models/customerModel.js";
 
 let TableItemId = null;
 let orderTableDb = [];
@@ -17,7 +16,7 @@ function populateCustomerDropdown() {
     customerSelect.innerHTML = "";
 
     // Loop through CustomerDB to create option elements
-    customer_array.forEach(customer => {
+    CustomerDB.forEach(customer => {
         const option = document.createElement("option");
         option.value = customer.id;
         option.textContent = customer.id;
@@ -25,7 +24,7 @@ function populateCustomerDropdown() {
     });
 
 }
-function handleCustomer() {
+function handleCustomerSelection() {
     const customerSelect = document.getElementById("customer1");
     const nameField = document.getElementById("name1");
     const addressField = document.getElementById("address1");
@@ -35,7 +34,7 @@ function handleCustomer() {
 
     TableItemId = selectedCustomerId;
 
-    const customer = customer_array.find(c => {
+    const customer = CustomerDB.find(c => {
         return String(c.id) === String(selectedCustomerId);
     });
     // Update name and address fields if a customer is found
@@ -49,7 +48,7 @@ function handleCustomer() {
 }
 
 $("#customer1").on("click",function (){
-    handleCustomer();
+    handleCustomerSelection();
 });
 
 /////////////////////////////////////////////////////////////////
@@ -61,7 +60,7 @@ function populateItemDropdown(){
 
     itemSelect.innerHTML = "";
 
-    item_array.forEach(item => {
+    ItemDB.forEach(item => {
         const option = document.createElement("option");
         option.value = item.Itemid;
         option.textContent = item.Itemid;
@@ -77,7 +76,7 @@ function handleItemSelection(){
 
     const selectedItemId = itemSelect.value;
 
-    const item = item_array.find(i => {
+    const item = ItemDB.find(i => {
         return String(i.Itemid) === String(selectedItemId);
     });
 
@@ -97,13 +96,13 @@ $("#item").on("click", function (){
 });
 
 /////////////////////////////////////////////////////////////////
-/*Generate Order Id */
+/*Genarate Order Id */
 /////////////////////////////////////////////////////////////////
 
-function generateOrderId () {
-    if (order_array.length === 0) return 'O001'
+function genarateOrderId () {
+    if (OrderDB.length === 0) return 'O001'
 
-    const lastOrderId = order_array[order_array.length - 1].orderId;
+    const lastOrderId = OrderDB[OrderDB.length - 1].orderId;
     const lastIdNum = parseInt(lastOrderId.slice(1),10);
     return 'O' + String(lastIdNum + 1).padStart(3, '0');
 }
@@ -115,7 +114,7 @@ function generateOrderId () {
 document.addEventListener("DOMContentLoaded", function() {
     const orderIdField = document.getElementById("orderID");
     if (orderIdField) {
-        orderIdField.value = generateOrderId();
+        orderIdField.value = genarateOrderId();
     } else {
         console.error("Order ID field not found");
     }
@@ -169,7 +168,7 @@ const clearForm = () => {
     $('#qty1').val('');
     $('#orderQty').val('');
     $('#price1').val('');
-    generateOrderId();
+    genarateOrderId();
 }
 
 /////////////////////////////////////////////////////////////////
@@ -202,14 +201,34 @@ function calculateTotal() {
     document.getElementById("subtotal").textContent = total.toFixed(2);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*/Calculate Total/*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*function calculateTotal() {
+    let total = 0;
+    const table = document.getElementById("orderTable");
+
+    // Loop through each row except the header row
+    for (let i = 0; i < table.rows.length; i++) {
+        const totalCell = table.rows[i].cells[4]; // Assuming "Total" is in the 5th column (index 4)
+        const cellValue = parseFloat(totalCell.innerText || totalCell.textContent); // Parse as float for decimal values
+
+        if (!isNaN(cellValue)) {
+            total += cellValue; // Add to total if it's a valid number
+        }
+    }
+
+
+   /!* /document.querySelector("h4 > strong").textContent = total.toFixed(2);/!*!/
+}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*/Cash And Discount/*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getSubTotalValue() {
-    let subtotal_value = parseFloat(document.getElementById("subtotal").textContent) || 0;
-    return subtotal_value;
+    let subtotal_Value = parseFloat(document.getElementById("subtotal").textContent) || 0;
+    return subtotal_Value;
 }
 
 function calculateCashBalance(){

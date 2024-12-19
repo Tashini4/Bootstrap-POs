@@ -1,16 +1,20 @@
-import CustomerModels from "../models/customerModels.js";
-import {customer_array} from "../db/database.js";
+///////////////////////////////////////////////////////
+/*Customer Save & Table update*/
+//////////////////////////////////////////////////////
+
+import CustomerModel from "../models/customerModel.js";
+import {CustomerDB} from "../db/database.js";
+import {ItemDB} from "../db/database.js";
+
 
 let selected_customer_Index = null;
-const validateEmail = (email) => {
+
+const sriLankanMobileRegex = /^(?:\+94|0)?7[0-9]{8}$/;
+
+const validEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
-}
-
-const validateMobile = (mobile) => {
-    const sriLankanMobileRegex = /^(?:\+94|0)?7[0-9]{8}$/;
-    return sriLankanMobileRegex.test(mobile);
-}
+};
 
 $("#SaveCustomer").on("click", function() {
     let First_Name = $("#firstName").val();
@@ -33,7 +37,7 @@ $("#SaveCustomer").on("click", function() {
             text: "Last Name",
             footer: '<a href="#">Fill the Last Name</a>'
         });
-    }else if (!validateEmail(Email)){
+    }else if (!validEmail(Email)){
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -55,15 +59,15 @@ $("#SaveCustomer").on("click", function() {
             footer: '<a href="#">Fill the Address</a>'
         });
     } else {
-        let customerData = new CustomerModels(
-            customer_array.length + 1,
+        let customerData = new CustomerModel(
+            CustomerDB.length + 1,
             First_Name,
             Last_Name,
             Email,
             Phone_Number,
             Cus_Address
         );
-        customer_array.push(customerData);
+        CustomerDB.push(customerData);
         Swal.fire({
             title: "Customer is Saved!",
             text: "You clicked the button!",
@@ -75,7 +79,7 @@ $("#SaveCustomer").on("click", function() {
 
 const customerTable = () => {
     $("#CustomerTable").empty();
-    customer_array.map((item,index) => {
+    CustomerDB.map((item,index) => {
         let Data = `<tr>
             <td>${item.id}</td>
             <td>${item.firstName}</td>
@@ -109,7 +113,7 @@ $("#customer_update_button").on("click", function() {
     let phone_Number = $("#mobile").val();
     let customer_Address = $("#address").val();
 
-    if (selected_customer_Index !== undefined && selected_customer_Index < customer_array.length) {
+    if (selected_customer_Index !== undefined && selected_customer_Index < CustomerDB.length) {
 
         /*let updatedCustomer = {
             id: CustomerDB[selected_customer_Index].id, // Preserve existing ID
@@ -120,8 +124,8 @@ $("#customer_update_button").on("click", function() {
             address: customer_Address
         };*/
 
-        let customerUpdate = new CustomerModels(
-            customer_array[selected_customer_Index].id,
+        let customerUpdate = new CustomerModel(
+            CustomerDB[selected_customer_Index].id,
             first_Name,
             last_Name,
             cus_Email,
@@ -129,7 +133,7 @@ $("#customer_update_button").on("click", function() {
             customer_Address
         );
 
-        customer_array[selected_customer_Index] = customerUpdate;
+        CustomerDB[selected_customer_Index] = customerUpdate;
 
         customerTable();
 
@@ -145,7 +149,7 @@ $("#CustomerTable").on("click",'tr', function (){
 
     selected_customer_Index = $(this).index();
 
-    let customer_obj = customer_array[value];
+    let customer_obj = CustomerDB[value];
 
     let first_name = customer_obj.firstName;
     let last_name = customer_obj.lastName;
@@ -182,7 +186,7 @@ $("#Customer_delete_button").on("click", function (){
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            customer_array.splice(selected_customer_Index, 1);
+            CustomerDB.splice(selected_customer_Index, 1);
             clearForm();
             customerTable();
             swalWithBootstrapButtons.fire({
@@ -201,6 +205,15 @@ $("#Customer_delete_button").on("click", function (){
         }
     });
 
-
-
 });
+
+
+
+
+
+
+
+
+
+
+
